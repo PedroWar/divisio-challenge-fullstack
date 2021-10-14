@@ -1,6 +1,7 @@
 import express from 'express'
 
 import { mockUsers } from '../mocks/users'
+import { PokeApi } from './pokemonApi' 
 
 const router = express.Router()
 
@@ -10,6 +11,12 @@ router.get('/', (req, res) => {
 
 router.get('/users', (req, res) => {
   res.send(mockUsers)
+})
+
+router.get('/pokedex', async (req, res)=> {
+  let pokedex = new PokeApi();
+  
+  res.send(await pokedex.getPokemonList())
 })
 
 export default router
