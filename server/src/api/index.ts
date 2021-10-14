@@ -1,7 +1,7 @@
 import express from 'express'
 
 import { mockUsers } from '../mocks/users'
-import { reqPokedex } from './pokemonClient' 
+import { PokeApi } from './pokemonApi' 
 
 const router = express.Router()
 
@@ -14,8 +14,9 @@ router.get('/users', (req, res) => {
 })
 
 router.get('/pokedex', async (req, res)=> {
-  await reqPokedex()
-  res.send()
+  let pokedex = new PokeApi();
+  
+  res.send(await pokedex.getPokemonList())
 })
 
 export default router
