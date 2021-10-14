@@ -1,20 +1,35 @@
-const { RESTDataSource } = require('apollo-datasource-rest');
+import * as https from "https"
 
-export class PokeApi extends RESTDataSource {
-  constructor() {
-    super();
-    this.baseURL = 'https://pokeapi.co//api/v2/';
+export class PokeApi {
+    readonly getListOptions = {
+      hostname: 'pokeapi.co',
+      port: 443,
+      path: '/api/v2/pokemon?limit=20',
+      method: 'GET'
+    }
+
+    constructor() {
+    }
+
+    async getPokemonList() {
+      let data = '';
+      let req = https.request(this.getListOptions, res => {
+              console.log(`statusCode: ${res.statusCode}`)
+  
+              res.on('data', chunk => {
+                  data += chunk;
+              })
+  
+              res.on('end', () => {
+                  console.log(JSON.parse(data)); // 'Buy the milk'
+              })
+          })
+                  
+          req.on('error', error => {
+              console.error(error)
+          })
+          
+          req.end()
   }
-
-//   async getMovie(id) {
-//     return this.get(`movies/${encodeURIComponent(id)}`);
-//   }
-
-  async getPokemonList(limit = 10) {
-    const data = await this.get('pokemon?limit=20', {
-      per_page: limit,
-      order_by: 'most_viewed',
-    });
-    return data.results;
-  }
+    
 }
