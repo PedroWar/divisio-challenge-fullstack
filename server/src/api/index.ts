@@ -16,7 +16,7 @@ router.get('/users', (req, res) => {
 router.get('/pokedex', async (req, res)=> {
   let pokedex = new PokeApi();
   
-  res.send(await pokedex.getPokemonList())
+  res.send(await pokedex.getPokedex())
 })
 
 export default router
