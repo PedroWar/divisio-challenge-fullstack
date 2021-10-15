@@ -8,10 +8,17 @@ export class PokeApi extends RESTDataSource {
   }
 
   async getPokedex(limit = 10) {
+    let results = []
+    
     const data = await this.get('/pokemon?limit=20/', {
       per_page: limit,
       order_by: 'name',
     });
+
+    results = data.results    
+    results.map(result=>result.id = result.url.split("/")[6])    
+
     return data.results;
+
   }
 }
