@@ -35,11 +35,9 @@ export class PokeApi extends RESTDataSource {
       pokemon.spriteFrontShiny = pokemon.sprites.front_shiny
     }
 
-    if(pokemon.types !== undefined) {
+    if(pokemon.types !== undefined) 
       pokemon.typeList = pokemon.types.map(type=> type.type.name)
 
-      console.log("TIPO", pokemon.types)
-    }
     return pokemon
   }
 
