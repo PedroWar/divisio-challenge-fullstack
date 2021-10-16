@@ -1,3 +1,4 @@
+import { PokeApi } from '../api/pokemonApi'
 import { ApolloServer } from 'apollo-server-express'
 import { Express } from 'express'
 
@@ -9,7 +10,12 @@ export const setupApolloServer = (app: Express): void => {
     resolvers,
     typeDefs,
     playground: true,
-    introspection: true
+    introspection: true,
+    dataSources: () => {
+      return {
+        PokeApi: new PokeApi(),
+      }
+    }
   })
 
   server.applyMiddleware({ app })
