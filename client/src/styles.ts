@@ -3,6 +3,7 @@ import logo from './logo.svg'
 
 export const Container = styled.div`
   text-align: center;
+  font-family:verdana;
 `
 
 export const Header = styled.header`
@@ -43,4 +44,9 @@ export const Logo = styled.img.attrs({
   @media (prefers-reduced-motion: no-preference) {
     animation: App-logo-spin infinite 20s linear;
   }
+`
+export const row = styled.div`
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 25px;
 `
